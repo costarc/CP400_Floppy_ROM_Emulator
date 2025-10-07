@@ -1,0 +1,52 @@
+✅ Updated I2C Pin Selection
+Let’s use I2C3, which is not used in your project and maps cleanly to:
+|  |  |  | 
+|  |  |  | 
+|  |  |  | 
+|  |  |  | 
+|  |  |  | 
+
+
+These pins are free in your layout and don’t conflict with MSX bus or control signals.
+
+🧠 Integration Strategy
+- Enable I2C3 in CubeMX or manually configure:
+- Set PA8 and PC9 to Alternate Function 4 (AF4)
+- Enable I2C3 clock
+- Configure timing for ~100kHz or 400kHz depending on your display
+- Initialize Display using a library like u8g2 or ssd1306-stm32HAL.
+- Update Display on File Change:
+- Hook into your file selection logic (where PREV/NEXT updates the filename)
+- Call display_show_filename(filename) to refresh the screen
+
+🧩 Example Hook
+Assuming you have a char selected_filename[64]; updated by button presses:
+void on_file_selected(const char *filename) {
+    strncpy(selected_filename, filename, sizeof(selected_filename));
+    display_show_filename(selected_filename);
+}
+
+
+
+Would you like me to help you patch this into your existing main.c or generate a CubeMX .ioc snippet for I2C3 setup? I can also annotate the display update logic to match your documentation style.
+
+
+🧠 Integration Strategy
+- Enable I2C3 in CubeMX or manually configure:
+- Set PA8 and PC9 to Alternate Function 4 (AF4)
+- Enable I2C3 clock
+- Configure timing for ~100kHz or 400kHz depending on your display
+- Initialize Display using a library like u8g2 or ssd1306-stm32HAL.
+- Update Display on File Change:
+- Hook into your file selection logic (where PREV/NEXT updates the filename)
+- Call display_show_filename(filename) to refresh the screen
+
+
+🧩 Example Hook
+Assuming you have a char selected_filename[64]; updated by button presses:
+
+void on_file_selected(const char *filename) {
+    strncpy(selected_filename, filename, sizeof(selected_filename));
+    display_show_filename(selected_filename);
+}
+
